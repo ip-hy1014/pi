@@ -14,21 +14,21 @@
 </head>
 <body>
 <h1>円周率桁当てゲーム</h1>
-<p>円周率の次の桁を入力してください:</p>
+<p>円周率の次の桁を連続した数字で入力してください:</p>
 <input type="text" id="userInput" autofocus>
-<button onclick="checkDigit()">チェック</button>
+<button onclick="checkDigits()">チェック</button>
 <p id="result"></p>
 
 <script>
 const piDigits = Math.PI.toString().replace(".", "");  // 円周率の小数点以下を取り除く
 let correctDigits = 0;
 
-function checkDigit() {
-  const userInput = document.getElementById("userInput").value.trim();
-  const currentDigit = piDigits.charAt(correctDigits);
+function checkDigits() {
+  const userInput = document.getElementById("userInput").value;
+  const remainingDigits = piDigits.substring(correctDigits, correctDigits + userInput.length);
 
-  if (userInput === currentDigit) {
-    correctDigits++;
+  if (userInput === remainingDigits) {
+    correctDigits += userInput.length;
 
     if (correctDigits === piDigits.length) {
       document.getElementById("result").textContent = "すべての桁を正しく入力しました！おめでとうございます！";
