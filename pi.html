@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>円周率桁当てゲーム</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 100px;
+  }
+</style>
+</head>
+<body>
+<h1>円周率桁当てゲーム</h1>
+<p>円周率の次の桁を入力してください:</p>
+<input type="text" id="userInput" autofocus>
+<button onclick="checkDigit()">チェック</button>
+<p id="result"></p>
+
+<script>
+const piDigits = Math.PI.toString().replace(".", "");  // 円周率の小数点以下を取り除く
+let correctDigits = 0;
+
+function checkDigit() {
+  const userInput = document.getElementById("userInput").value.trim();
+  const currentDigit = piDigits.charAt(correctDigits);
+
+  if (userInput === currentDigit) {
+    correctDigits++;
+
+    if (correctDigits === piDigits.length) {
+      document.getElementById("result").textContent = "すべての桁を正しく入力しました！おめでとうございます！";
+    } else {
+      document.getElementById("result").textContent = "正解！次の桁を入力してください。";
+      document.getElementById("userInput").value = "";
+      document.getElementById("userInput").focus();
+    }
+  } else {
+    document.getElementById("result").textContent = `間違いです。入力できた桁数: ${correctDigits}`;
+  }
+}
+</script>
+</body>
+</html>
